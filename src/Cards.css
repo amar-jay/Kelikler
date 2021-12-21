@@ -26,10 +26,15 @@
   height: 100%;
 }
 
-.card h3 {
-  position: absolute;
-  bottom: 0;
-  margin: 10px;
-  color: #fff;
+.card {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-around;
+}
+.card_englishname{
+ font: bold 75px #ccc;
+ font-family: monospace;
+
 }
 

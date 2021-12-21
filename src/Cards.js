@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import TinderCard from "react-tinder-card";
 //import axios from "./axios";
+import randomColor from "randomcolor";
 import "./Cards.css";
+//import { func } from "assert-plus";
 
 // function TinderCars() {
 //   // useEffect(() => {
@@ -17,23 +19,27 @@ import "./Cards.css";
 //   return;
 // }
 
-function Cards() {
-  const [count, setCount] = useState(0);
-  const [people] = useState([
-    {name: "Manan", imgUrl: "https://ia.tmgrup.com.tr/68ced0/0/0/0/0/0/0?u=https://i.tmgrup.com.tr/fikriyat//album/2019/03/24/1553435609045.jpg&mw=752"},
-    {name: "SSs", imgUrl: "https://img.paratic.com/dosya/2017/03/ehveniser-eski-turkce-kelimeler.jpg"},
-    {name: "Efulim", imgUrl: "https://i.pinimg.com/originals/6a/e5/20/6ae5207325acf5c822ec4f4c19074253.jpg"}
+function Cards({reloaded}) {
+  //const [count, setCount] = useState({index: 0});
+  const [swiped] = useState([{name: '', color: '#ddd'}]);
+  const [unswiped] = useState([
+    {Englishname: "Shirt", Turkishname: "Gömlek"},
+    {Englishname: "Handkerchief", Turkishname: "Mendil"},
+    {Englishname: "Go!", Turkishname: "Git!"},
+    {Englishname: "Shoe", Turkishname: "Ayakabbı"},
+
+    
   ]);
 
   const outOfFrame = (name) => {
-    console.log(name + " left the screen");
+    console.log(...swiped)
+    };
+  const swipe = (nameToDelete) => {
+    //setSwiped({name: nameToDelete, color: "eee"});
+    //console.log(...swiped);
   };
 
-
-  const swiped = (direction, nameToDelete) => {
-    console.log("removing: " + nameToDelete);
-  
-  };
+  (reloaded) && window.location.reload(false);
 
   return (
     <div>
@@ -43,25 +49,23 @@ function Cards() {
       className="tinderCards__cardContainer"
       >
 
-      {(count !== people.length)?
-      people.map((person) => (
+      { unswiped.map((person) => (
           <TinderCard
             className="swipe"
             key={person.name}
-            preventSwipe={["up", "down"]}
-            onSwipe={(dir) => swiped(dir, person.name) }
-            onCardLeftScreen={() => { outOfFrame(person.name);}          } >
+            preventSwipe={["down"]}
+            onCardLeftScreen={() => {outOfFrame(person.name);}}>
 
             <div
-              style={{ backgroundImage: `url(${person.imgUrl})` }}
+              style={{backgroundColor: `${randomColor()}`}}
               className="card"
-              onMouseDown={() => setCount(count + 1)}
-            >
-              <h3>{person.name}</h3>
+              onMouseDown={() =>swipe(person.Englishname)}
+              >
+              <h1 className="card__englishname"> {person.Turkishname} </h1>
+              <h2 className="card__turkishname">{person.Englishname} </h2>
             </div>
           </TinderCard>
-        )):
-        window.location.reload(false)
+        ))
         }
               
       </div>

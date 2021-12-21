@@ -14,7 +14,7 @@ const firebaseConfig = {
   storageBucket: "kelimlerim.appspot.com",
   messagingSenderId: "124496247527",
   appId: env.APP_ID,
-  measurementId: "G-Z3ZCC3DW0S"
+  measurementId: env.MEASUREMENT_ID
 };
 
 // Initialize Firebase
